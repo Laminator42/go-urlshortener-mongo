@@ -1,0 +1,130 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "An open source URL shortener API in Go using Gin framework and MongoDB as backend.",
+        "title": "URL Shortener API",
+        "contact": {
+            "name": "Jannik Bach"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/shorten": {
+            "post": {
+                "description": "Generates unique short ID and writes mapping of short URL and long URL into Mongo database. Responds with short URL, expiration date and database id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "urlshortener"
+                ],
+                "summary": "Shorten any URL",
+                "parameters": [
+                    {
+                        "description": "LongURL to be shortened",
+                        "name": "longUrl",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Short URL, expiration date, and database ID",
+                        "schema": {
+                            "$ref": "#/definitions/urlshortener.shortenResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request or invalid input",
+                        "schema": {
+                            "$ref": "#/definitions/common.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/common.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/{key}": {
+            "get": {
+                "description": "URL mapping lookup and redirects to destination",
+                "consumes": [
+                    "text/plain"
+                ],
+                "tags": [
+                    "urlshortener"
+                ],
+                "summary": "Follow short URL to destination",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Short URL key",
+                        "name": "key",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "301": {
+                        "description": "Redirect to the destination URL",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid key or URL not found",
+                        "schema": {
+                            "$ref": "#/definitions/common.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/common.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "common.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "urlshortener.shortenResponse": {
+            "type": "object",
+            "properties": {
+                "db_id": {
+                    "type": "string"
+                },
+                "expires": {
+                    "type": "string"
+                },
+                "newUrl": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

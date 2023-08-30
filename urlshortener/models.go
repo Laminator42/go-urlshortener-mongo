@@ -10,6 +10,12 @@ type shortenBody struct {
 	LongUrl string `json:"longUrl"`
 }
 
+type shortenResponse struct {
+	NewUrl  string `json:"newUrl"`
+	Expires string `json:"expires"`
+	DbID    string `json:"db_id"`
+}
+
 type urlDocument struct {
 	ID        primitive.ObjectID `bson:"_id"`
 	UrlKey    string             `bson:"urlKey"`

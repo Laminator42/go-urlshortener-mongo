@@ -1,0 +1,88 @@
+basePath: /
+definitions:
+  common.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  urlshortener.shortenResponse:
+    properties:
+      db_id:
+        type: string
+      expires:
+        type: string
+      newUrl:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    name: Jannik Bach
+  description: An open source URL shortener API in Go using Gin framework and MongoDB
+    as backend.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: URL Shortener API
+  version: "1.0"
+paths:
+  /{key}:
+    get:
+      consumes:
+      - text/plain
+      description: URL mapping lookup and redirects to destination
+      parameters:
+      - description: Short URL key
+        in: path
+        name: key
+        required: true
+        type: string
+      responses:
+        "301":
+          description: Redirect to the destination URL
+          schema:
+            type: string
+        "400":
+          description: Invalid key or URL not found
+          schema:
+            $ref: '#/definitions/common.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/common.ErrorResponse'
+      summary: Follow short URL to destination
+      tags:
+      - urlshortener
+  /shorten:
+    post:
+      consumes:
+      - application/json
+      description: Generates unique short ID and writes mapping of short URL and long
+        URL into Mongo database. Responds with short URL, expiration date and database
+        id
+      parameters:
+      - description: LongURL to be shortened
+        in: body
+        name: longUrl
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Short URL, expiration date, and database ID
+          schema:
+            $ref: '#/definitions/urlshortener.shortenResponse'
+        "400":
+          description: Bad request or invalid input
+          schema:
+            $ref: '#/definitions/common.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/common.ErrorResponse'
+      summary: Shorten any URL
+      tags:
+      - urlshortener
+swagger: "2.0"

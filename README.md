@@ -5,6 +5,10 @@ For learning purposes I tried to build a URL Shortener. It is very close to Alan
 ## Next steps
 
 - [ ] Add Swagger UI
+  - Followed article [here](https://santoshk.dev/posts/2022/how-to-integrate-swagger-ui-in-go-backend-gin-edition/)
+  - Run swag init always you change the docs for the api. It uses comments.
+  - [ ] Add response structs (some maybe in common?) --> Isolate health and root endpoints for swagger doc!
 - [ ] Build simple frontend on top (maybe Vue3?)
 - [ ] Dockerize application
 - [ ] Build a browser extension that resolves short links bevor you click on it
+- [ ] Add SSL support

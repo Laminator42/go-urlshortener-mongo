@@ -1,6 +1,10 @@
 package db
 
-import "github.com/Laminator42/go-urlshortener-mongo/util"
+import (
+	"fmt"
+
+	"github.com/Laminator42/go-urlshortener-mongo/util"
+)
 
 type MongoConfig struct {
 	mongoHost string
@@ -8,6 +12,16 @@ type MongoConfig struct {
 	mongoDb   string
 	username  string
 	password  string
+}
+
+func (c MongoConfig) connectionString() string {
+	return fmt.Sprintf("mongodb://%s:%s@%s:%s/%s",
+		conf.username,
+		conf.password,
+		conf.mongoHost,
+		conf.mongoPort,
+		conf.mongoDb,
+	)
 }
 
 var conf = MongoConfig{

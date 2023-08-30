@@ -12,5 +12,5 @@ For learning purposes I tried to build a URL Shortener. It is very close to Alan
   - [x] Redirect from /docs to /docs/index.html
 - [ ] Build simple frontend on top (maybe Vue3?)
 - [ ] Dockerize application
-- [ ] Build a browser extension that resolves short links bevor you click on it
+- [ ] Build a browser extension that resolves short links before you click on it
 - [ ] Add SSL support

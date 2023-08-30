@@ -2,7 +2,6 @@ package db
 
 import (
 	"context"
-	"fmt"
 	"log"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -13,13 +12,7 @@ var Collection *mongo.Collection
 var Ctx = context.TODO()
 
 func Init() {
-	connectionString := fmt.Sprintf("mongodb://%s:%s@%s:%s/%s",
-		conf.username,
-		conf.password,
-		conf.mongoHost,
-		conf.mongoPort,
-		conf.mongoDb,
-	)
+	connectionString := conf.connectionString()
 	clientOptions := options.Client().ApplyURI(connectionString)
 	client, err := mongo.Connect(Ctx, clientOptions)
 	if err != nil {

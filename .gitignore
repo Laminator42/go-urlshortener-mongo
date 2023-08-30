@@ -1,0 +1,4 @@
+# IDEs + MacOS
+.vscode/
+.idea/
+.DS_Store

@@ -29,18 +29,31 @@ func main() {
 
 	router := gin.Default()
 
-	// Add Swagger router
-	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-
-	// Root endpoint
-	router.GET("/", func(c *gin.Context) { c.JSON(http.StatusAccepted, gin.H{"message": "URL Shortener"}) })
-
-	// Health check
-	router.GET("/health", func(ctx *gin.Context) { ctx.JSON(http.StatusOK, gin.H{"status": "ok"}) })
+	// Add Swagger UI
+	router.GET("/docs/", func(c *gin.Context) { c.Redirect(http.StatusPermanentRedirect, "/docs/index.html") })
+	router.GET("/docs/:any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	// Add urlshortener router group
 	v1 := router.Group("/")
 	urlshortener.UrlsRegister(v1)
 
+	// Health check
+	router.GET("/health", health)
+
 	router.Run(urlshortener.AppConf.HostAddress())
+}
+
+type healthResponse struct {
+	Status string `json:"status"`
+}
+
+// health		godoc
+// @Summary		Health check
+// @Description	Is the application up?
+// @Tags		main
+// @Accept		plain
+// @Success	200	object	healthResponse	"ok"
+// @Router		/health	[get]
+func health(c *gin.Context) {
+	c.JSON(http.StatusOK, healthResponse{Status: "ok"})
 }

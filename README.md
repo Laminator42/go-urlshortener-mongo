@@ -9,7 +9,7 @@ For learning purposes I tried to build a URL Shortener. It is very close to Alan
   - Run swag init always you change the docs for the api. It uses comments.
   - [x] Add response structs (some maybe in common?) --> Isolate health and root endpoints for swagger doc!
     - No idea if this is good or just over engineered
-  - [ ] Redirect from /docs to /docs/index.html
+  - [x] Redirect from /docs to /docs/index.html
 - [ ] Build simple frontend on top (maybe Vue3?)
 - [ ] Dockerize application
 - [ ] Build a browser extension that resolves short links bevor you click on it

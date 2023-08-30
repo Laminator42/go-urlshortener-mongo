@@ -5,6 +5,11 @@ definitions:
       error:
         type: string
     type: object
+  main.healthResponse:
+    properties:
+      status:
+        type: string
+    type: object
   urlshortener.shortenResponse:
     properties:
       db_id:
@@ -53,6 +58,19 @@ paths:
       summary: Follow short URL to destination
       tags:
       - urlshortener
+  /health:
+    get:
+      consumes:
+      - text/plain
+      description: Is the application up?
+      responses:
+        "200":
+          description: ok
+          schema:
+            $ref: '#/definitions/main.healthResponse'
+      summary: Health check
+      tags:
+      - main
   /shorten:
     post:
       consumes:

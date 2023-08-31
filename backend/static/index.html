@@ -25,6 +25,11 @@
           <label for="url">Enter the URL you want to shorten:</label>
           <input type="text" id="url" placeholder="Enter URL" />
           <button id="shortenBtn">Shorten</button>
+
+          <div id="shortenedLinkSection" class="hidden shortened-link-section">
+            <p>Your shortened link:</p>
+            <a id="shortenedLink" class="shortened-link" href="#" target="_blank"></a>
+          </div>
         </div>
       </div>
     </main>
@@ -33,6 +38,10 @@
     <script>
       const shortenBtn = document.getElementById("shortenBtn");
       const urlInput = document.getElementById("url");
+      const shortenedLinkSection = document.getElementById(
+        "shortenedLinkSection"
+      );
+      const shortenedLink = document.getElementById("shortenedLink");
 
       shortenBtn.addEventListener("click", () => {
         const url = urlInput.value;
@@ -44,8 +53,11 @@
             headers: { "Content-Type": "application/json" },
           })
             .then((response) => response.json())
-            .then((data) => console.log(data));
-          alert("URL shortened: " + url);
+            .then((data) => {
+              shortenedLink.textContent = data.newUrl;
+              shortenedLink.href = data.newUrl;
+              shortenedLinkSection.classList.remove("hidden");
+            });
         } else {
           alert("Please enter a valid URL.");
         }

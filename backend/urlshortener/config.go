@@ -16,7 +16,14 @@ func (c AppConfig) HostAddress() string {
 }
 
 func (c AppConfig) BaseUrl() string {
-	return fmt.Sprintf("http://%s:%s/", c.Host, c.Port)
+	switch port := c.Port; port {
+	case "80":
+		return fmt.Sprintf("http://%s/", c.Host)
+	case "443":
+		return fmt.Sprintf("https://%s/", c.Host)
+	default:
+		return fmt.Sprintf("http://%s:%s/", c.Host, c.Port)
+	}
 }
 
 var AppConf = AppConfig{

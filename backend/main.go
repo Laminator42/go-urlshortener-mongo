@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/Laminator42/go-urlshortener-mongo/db"
@@ -39,7 +40,7 @@ func main() {
 	// Health check
 	router.GET("/health", health)
 
-	router.Run(urlshortener.AppConf.HostAddress())
+	router.Run(fmt.Sprintf("http://0.0.0.0:%s/", urlshortener.AppConf.Port))
 }
 
 type healthResponse struct {

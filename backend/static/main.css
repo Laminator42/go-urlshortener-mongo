@@ -12,9 +12,23 @@ header {
   padding: 1rem;
 }
 
+.bg-image {
+  background-image: url('./background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: calc(100vh - 80px); /* Subtract header height */
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+/* .center-container {
+
+} */
+
 .container {
   max-width: 600px;
-  margin: 0 auto;
+  margin-top: 2rem;
   padding: 2rem;
   background: linear-gradient(135deg, #ffffff, #f0f0f0);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

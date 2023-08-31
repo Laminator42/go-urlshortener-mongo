@@ -20,6 +20,6 @@ func (c AppConfig) BaseUrl() string {
 }
 
 var AppConf = AppConfig{
-	Host: util.GetEnv("APP_HOST", "localhost"),
-	Port: util.GetEnv("APP_PORT", "8080"),
+	Host: util.GetEnv("BACKEND_HOST", "0.0.0.0"),
+	Port: util.GetEnv("BACKEND_PORT", "8080"),
 }

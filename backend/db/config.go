@@ -25,9 +25,9 @@ func (c MongoConfig) connectionString() string {
 }
 
 var conf = MongoConfig{
-	mongoHost: util.GetEnv("MONGO_HOST", "10.100.253.55"),
-	mongoPort: util.GetEnv("MONGO_PORT", "27017"),
-	mongoDb:   util.GetEnv("MONGO_DB", "urlshortener"),
-	username:  util.GetEnv("MONGO_USER", "urluser"),
-	password:  util.GetEnv("MONGO_PASS", "urlpassword"),
+	mongoHost: util.GetEnv("BACKEND_DB_HOST", "mongodb"),
+	mongoPort: util.GetEnv("BACKEND_DB_PORT", "27017"),
+	mongoDb:   util.GetEnv("BACKEND_DB_DATABASE", "urlshortener"),
+	username:  util.GetEnv("BACKEND_DB_USERNAME", "urluser"),
+	password:  util.GetEnv("BACKEND_DB_PASSWORD", "urlpassword"),
 }

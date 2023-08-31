@@ -40,7 +40,7 @@ func main() {
 	// Health check
 	router.GET("/health", health)
 
-	router.Run(fmt.Sprintf("http://0.0.0.0:%s/", urlshortener.AppConf.Port))
+	router.Run(fmt.Sprintf("0.0.0.0:%s", urlshortener.AppConf.Port))
 }
 
 type healthResponse struct {

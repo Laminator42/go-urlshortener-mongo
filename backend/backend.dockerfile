@@ -2,7 +2,7 @@ FROM golang:alpine
 
 LABEL org.opencontainers.image.authors="Jannik Bach"
 
-ENV GIN_MODE=release
+ENV GIN_MODE=${GIN_MODE}
 ENV APP_HOST=0.0.0.0
 
 WORKDIR /go/app

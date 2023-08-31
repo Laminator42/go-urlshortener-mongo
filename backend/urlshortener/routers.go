@@ -17,8 +17,10 @@ import (
 )
 
 func UrlsRegister(router *gin.RouterGroup) {
-	router.GET("/:key", redirect)
+	router.GET("/", func(c *gin.Context) { c.Redirect(http.StatusPermanentRedirect, "/app/index.html") })
+	router.Static("/app", "./static/")
 	router.POST("/shorten", shorten)
+	router.GET("/:key", redirect)
 }
 
 // shorten		godoc

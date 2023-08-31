@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/Laminator42/go-urlshortener-mongo/db"
@@ -29,10 +28,6 @@ func main() {
 
 	router := gin.Default()
 
-	// Add Swagger UI
-	router.GET("/docs/", func(c *gin.Context) { c.Redirect(http.StatusPermanentRedirect, "/docs/index.html") })
-	router.GET("/docs/:any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-
 	// Add urlshortener router group
 	v1 := router.Group("/")
 	urlshortener.UrlsRegister(v1)
@@ -40,7 +35,11 @@ func main() {
 	// Health check
 	router.GET("/health", health)
 
-	router.Run(fmt.Sprintf("0.0.0.0:%s", urlshortener.AppConf.Port))
+	// Add Swagger UI
+	router.GET("/docs/", func(c *gin.Context) { c.Redirect(http.StatusPermanentRedirect, "/docs/index.html") })
+	router.GET("/docs/:any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
+	router.Run(":" + urlshortener.AppConf.Port)
 }
 
 type healthResponse struct {

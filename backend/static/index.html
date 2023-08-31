@@ -14,8 +14,10 @@
   </head>
   <body>
     <header>
-      <img src="./icon.png" alt="ShortURL Icon" width="80" height="80" />
-      <h1>URL Shortener</h1>
+      <div class="header-content">
+        <img src="./icon.png" alt="ShortURL Icon" width="80" height="80" />
+        <h1>URL Shortener</h1>
+      </div>
     </header>
     <main class="bg-image">
       <div class="center-container">
@@ -28,7 +30,12 @@
 
           <div id="shortenedLinkSection" class="hidden shortened-link-section">
             <p>Your shortened link:</p>
-            <a id="shortenedLink" class="shortened-link" href="#" target="_blank"></a>
+            <a
+              id="shortenedLink"
+              class="shortened-link"
+              href="#"
+              target="_blank"
+            ></a>
           </div>
         </div>
       </div>

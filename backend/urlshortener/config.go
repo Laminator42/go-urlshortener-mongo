@@ -11,10 +11,6 @@ type AppConfig struct {
 	Port string
 }
 
-func (c AppConfig) HostAddress() string {
-	return fmt.Sprintf("%s:%s", c.Host, c.Port)
-}
-
 func (c AppConfig) BaseUrl() string {
 	switch port := c.Port; port {
 	case "80":
